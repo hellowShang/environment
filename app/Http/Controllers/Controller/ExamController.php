@@ -5,26 +5,25 @@ namespace App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-//use MongoDB\Client;
-
+use MongoDB\Client;
 class ExamController extends Controller
 {
     // 连接数据库
     public function mysql(){
         $data = [
-            'ip'        => $_SERVER['REMOTE_ADDR'],
+            'ip'        => $_SERVER['SERVER_ADDR'],
             'UA'        => $_SERVER['HTTP_USER_AGENT'],
-            'url'       => $_SERVER['REQUEST_URI'],
+            'url'       => $_SERVER['SERVER_NAME'],
             'time'      => $_SERVER['REQUEST_TIME']
         ];
-//        $mongodb = new Client('mongodb://192.168.188.145:27017');
-//        $db = $mongodb->test->test;
-//        $res= $db->insertOne($data);
+        $mongodb = new Client('mongodb://192.168.188.145:27017');
+        $db = $mongodb->test->test;
+        $res= $db->insertOne($data);
         $id = DB::table('test')->insertGetId($data);
 
 
         var_dump($id);echo "<br />";
-//        var_dump($res->getInsertedId());
+        var_dump($res->getInsertedId());
     }
 }
 
