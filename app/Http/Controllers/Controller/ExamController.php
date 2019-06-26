@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use MongoDB\Client;
 class ExamController extends Controller
 {
+
     // 连接数据库
     public function mysql(){
         $data = [
